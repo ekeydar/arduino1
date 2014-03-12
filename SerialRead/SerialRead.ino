@@ -41,14 +41,19 @@ void setup() {
 
 void loop() {
   // read the value from the sensor:
-  sensorValue = analogRead(sensorPin); 
+  if (Serial.available() > 0) {
+    sensorValue = Serial.parseInt();
+  }  
   Serial.println(sensorValue);  
   // turn the ledPin on
   digitalWrite(ledPin, HIGH);  
+  digitalWrite(ledPin2, LOW);  
   // stop the program for <sensorValue> milliseconds:
-  delay(50+sensorValue);          
+  delay(sensorValue);          
   // turn the ledPin off:        
   digitalWrite(ledPin, LOW);   
+  digitalWrite(ledPin2, HIGH);  
   // stop the program for for <sensorValue> milliseconds:
-  delay(50+sensorValue);                  
+  delay(sensorValue);                  
 }
+
